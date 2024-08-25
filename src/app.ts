@@ -4,6 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import notFound from "./app/middlewares/notFound";
 import globalErrorHandler from "./app/middlewares/globalErrorHandler";
+import { allRoutes } from "./app/routes";
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 // All  Routes will include here ***
+app.use("/api", allRoutes);
 
 //  Global Errors **
 app.use(globalErrorHandler);

@@ -4,6 +4,8 @@ import httpStatus from "http-status";
 import prisma from "../../db";
 import AppError from "../../errors/AppError";
 import { IUser } from "./User.interface";
+import { passwordHelpers } from "../../helpers/passwordHelper";
+import configs from "../../configs";
 
 const createUser = async (payload: IUser) => {
   const { password, data } = payload;
@@ -16,16 +18,48 @@ const createUser = async (payload: IUser) => {
     },
   });
 
-
   if (isExists) {
-     throw new AppError(httpStatus.BAD_REQUEST, "User Already Exists With This Email!!!")
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      "User Already Exists With This Email!!!"
+    );
   }
 
+  const hashedPassword = await passwordHelpers.encryptPassword(
+    password,
+    Number(configs.bcrypt_solt_round as string)
+  );
+  console.log(hashedPassword);
+  // Seperate User Data **
 
-  
+  const userData = {
+    name: data?.name,
+    email: data.email,
+    password: hashedPassword,
+  };
 
+  const result = await prisma.$transaction(async (tx) => {
+    const user = await tx.user.create({
+      data: userData,
+    });
 
-  
+    const userProfile = await tx.userProfile.create({
+      data: {
+        userId: user.id,
+        bio: data?.bio,
+        profession: data?.profession,
+        address: data?.address,
+      },
+    });
 
+    return {
+      user,
+      userProfile,
+    };
+  });
+  return result;
+};
 
+export const UserServices = {
+  createUser,
 };

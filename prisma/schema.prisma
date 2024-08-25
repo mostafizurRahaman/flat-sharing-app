@@ -30,7 +30,7 @@ model UserProfile {
   id          String   @id @default(uuid())
   userId      String   @unique
   bio         String   @db.VarChar()
-  proffession String   @db.VarChar()
+  profession String   @db.VarChar()
   address     String   @db.VarChar()
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

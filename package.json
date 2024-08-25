@@ -10,7 +10,8 @@
     "db:format": "npx prisma format",
     "db:push": "npx prisma push",
     "db:pull": "npx prisma pull",
-    "db:debug": "npx prisma debug"
+    "db:debug": "npx prisma debug",
+    "db:studio": "npx prisma studio"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
@@ -32,6 +33,7 @@
     "express": "^4.19.2",
     "http-status": "^1.7.4",
     "jsonwebtoken": "^9.0.2",
-    "ts-node-dev": "^2.0.0"
+    "ts-node-dev": "^2.0.0",
+    "zod": "^3.23.8"
   }
 }
