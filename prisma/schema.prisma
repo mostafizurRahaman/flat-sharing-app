@@ -13,6 +13,72 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id        String        @id @default(uuid())
+  profile   UserProfile?
+  name      String        @db.VarChar()
+  email     String        @unique @db.VarChar()
+  password  String        @db.VarChar()
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  booking Booking[]
+
+  @@map("users")
+}
+
+model UserProfile {
+  id          String   @id @default(uuid())
+  userId      String   @unique
+  bio         String   @db.VarChar()
+  proffession String   @db.VarChar()
+  address     String   @db.VarChar()
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("userProfiles")
+}
 
 
+model Flat {
+  id String @id @default(uuid())
+  squareFeet Int 
+  totalBedrooms Int @default(0)
+  totalRooms Int @default(0)
+  utilitiesDescription String
+  location String 
+  description String 
+  rent Int  @default(0)
+  availability  Boolean @default(true)
+  advanceAmount Int @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  booking Booking[]
 
+  @@map("flats")
+}
+      
+
+model Booking{
+  id String @id @default(uuid())
+  flatId String 
+  userId String
+  status BookStatus @default(PENDING)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+  flat Flat @relation(fields: [flatId], references: [id])
+
+
+  @@map("bookings")
+
+}
+
+
+enum BookStatus {
+   PENDING
+   BOOKED
+   REJECTED
+}
