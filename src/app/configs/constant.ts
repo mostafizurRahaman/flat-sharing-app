@@ -6,7 +6,16 @@ type IMessagesPath =
   | "bio"
   | "password"
   | "address"
-  | "profession";
+  | "profession"
+  | "squareFeet"
+  | "totalBedrooms"
+  | "totalRooms"
+  | "utilitiesDescription"
+  | "location"
+  | "description"
+  | "rent"
+  | "availability"
+  | "advanceAmount";
 
 interface IMessageProperties {
   required: string;
@@ -37,6 +46,42 @@ const validateMessages: Record<IMessagesPath, IMessageProperties> = {
   profession: {
     required: "Profession Is Required!!!",
     invalid: "Profession Must Be String!!!",
+  },
+  squareFeet: {
+    required: "Square Feet Is Required!!!",
+    invalid: "Square Feet Must Be Number!!!",
+  },
+  totalRooms: {
+    required: "TotalBedrooms Is Required",
+    invalid: "totalBedrooms Should Be Number!!!",
+  },
+  totalBedrooms: {
+    required: "totalRooms Is Required",
+    invalid: "Total Rooms Should Be Number!!!",
+  },
+  utilitiesDescription: {
+    required: "utilitiesDescription Is Required!!!",
+    invalid: "utilitiesDescription Should Be String!!!",
+  },
+  location: {
+    required: "Location Is Required!!!",
+    invalid: "Location Should Be String!!!",
+  },
+  description: {
+    required: "Description Is Required!!!",
+    invalid: "Description Should Be String!!!",
+  },
+  rent: {
+    required: "Rent Is Required",
+    invalid: "Rent Should Be Number!!!",
+  },
+  advanceAmount: {
+    required: "AdvanceAmount Is Required",
+    invalid: "AdvanceAmount Should Be Number!!!",
+  },
+  availability: {
+    required: " ",
+    invalid: "Availability Should Be Boolean!!!",
   },
 };
 

@@ -15,6 +15,7 @@ const prisma = new PrismaClient({
 
 prisma.$on("info", (event) => {
   console.log(`🟢 ${event.message}`);
+  console.log(event.timestamp)
 });
 
 
