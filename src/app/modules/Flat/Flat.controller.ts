@@ -21,7 +21,7 @@ const createFlat = catchAsync(async (req, res, next) => {
   });
 });
 
-const getAllFlats = catchAsync(async (req, res, next) => {
+const getAllFlats = catchAsync(async (req, res) => {
 
   //  FilerAbleFields here **
   const filterOptions = pick(req.query, filterAbleFields);
@@ -42,7 +42,24 @@ const getAllFlats = catchAsync(async (req, res, next) => {
   });
 });
 
+
+const updateFlatByID = catchAsync(async(req,res) => {
+    
+  const { id } = req.params; 
+  
+  const result = await FlatServices.updateFlatByID(id, req.body)
+  
+  sendResponse(res, { 
+    statusCode: httpStatus.OK, 
+    success: true, 
+    message: 'Flat Information Updated Successfully!!!', 
+    data: result
+  })
+
+})
+
 export const FlatController = {
   createFlat,
   getAllFlats,
+  updateFlatByID,
 };

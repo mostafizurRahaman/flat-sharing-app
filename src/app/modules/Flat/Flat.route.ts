@@ -13,7 +13,12 @@ router.post(
   FlatController.createFlat
 );
 
+router.get("/", FlatController.getAllFlats);
 
-router.get('/',FlatController.getAllFlats)
+router.put(
+  "/:id",
+  validateRequest(FlatValidations.updateFlatValidationSchema),
+  FlatController.updateFlatByID
+);
 
-export const FlatRoutes = router; 
+export const FlatRoutes = router;

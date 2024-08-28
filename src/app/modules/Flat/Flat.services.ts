@@ -81,7 +81,33 @@ const getAllFlatsFromDB = async (
   };
 };
 
+
+//  Update Flats Information **
+const updateFlatByID = async(id: string, payload: Partial<Flat>) => {
+   
+  //  Check Is Flat Exists With This ID ** 
+  await prisma.flat.findUniqueOrThrow({
+    where: { 
+       id
+     }
+  })
+
+
+  const result = await prisma.flat.update({
+    where: {
+       id
+    }, 
+    data: payload
+  })
+
+
+  return result;
+}
+
+
+
 export const FlatServices = {
   createFlat,
   getAllFlatsFromDB,
+  updateFlatByID,
 };
