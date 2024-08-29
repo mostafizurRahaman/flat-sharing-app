@@ -3,6 +3,7 @@ import express from "express";
 import { userRoutes } from "../modules/User/User.rotues";
 import { AuthRoutes } from "../modules/Auth/Auth.route";
 import { FlatRoutes } from "../modules/Flat/Flat.route";
+import { BookingRoutes } from "../modules/Booking/Booking.Route";
 const router = express.Router();
 
 const routes = [
@@ -13,6 +14,10 @@ const routes = [
   {
     path: "/",
     route: AuthRoutes,
+  },
+  {
+    path: '/', 
+    route: BookingRoutes
   },
   {
     path: "/flats",

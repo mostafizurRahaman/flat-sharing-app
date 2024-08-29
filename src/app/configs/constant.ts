@@ -15,7 +15,8 @@ type IMessagesPath =
   | "description"
   | "rent"
   | "availability"
-  | "advanceAmount";
+  | "advanceAmount"
+  | "flatId";
 
 interface IMessageProperties {
   required: string;
@@ -80,8 +81,12 @@ const validateMessages: Record<IMessagesPath, IMessageProperties> = {
     invalid: "AdvanceAmount Should Be Number!!!",
   },
   availability: {
-    required: " ",
+    required: "Availibity Is Required!!! ",
     invalid: "Availability Should Be Boolean!!!",
+  },
+  flatId: {
+    required: "Flat Id Is Required!!!",
+    invalid: `Flat Id Is Invalid!!!`,
   },
 };
 

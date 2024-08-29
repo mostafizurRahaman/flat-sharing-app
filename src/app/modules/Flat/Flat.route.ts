@@ -17,8 +17,12 @@ router.get("/", FlatController.getAllFlats);
 
 router.put(
   "/:id",
+  auth,
   validateRequest(FlatValidations.updateFlatValidationSchema),
   FlatController.updateFlatByID
 );
+
+
+
 
 export const FlatRoutes = router;
