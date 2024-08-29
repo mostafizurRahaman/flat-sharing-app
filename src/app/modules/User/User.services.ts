@@ -65,14 +65,15 @@ const getMe = async (id: string, email: string) => {
 
   const userProfile = await prisma.user.findUniqueOrThrow({ 
     where: {
-       id
+      id,
+      email
      }
   }).profile()
 
 
   return userProfile
-
 }
+
 
 
 export const UserServices = {
