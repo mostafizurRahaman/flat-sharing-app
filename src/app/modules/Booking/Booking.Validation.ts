@@ -1,5 +1,6 @@
 import { INVALID, z } from "zod";
 import validateMessages from "../../configs/constant";
+import { BookStatus } from "@prisma/client";
 
 const createBookingValidationSchema = z.object({
   body: z.object({
@@ -12,7 +13,16 @@ const createBookingValidationSchema = z.object({
 
 
 
+const updateBookingValidationSchema = z.object({ 
+   body: z.object({
+      status: z.enum([BookStatus.BOOKED, BookStatus.PENDING, BookStatus.REJECTED])
+   }, {
+     message: `Invalid Booking Status!!`
+   })
+})
+
 
 export const bookingValidations = {
-   createBookingValidationSchema
-}
+  createBookingValidationSchema,
+  updateBookingValidationSchema,
+};
