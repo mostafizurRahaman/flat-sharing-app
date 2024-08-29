@@ -1,4 +1,3 @@
-//  Create User ***
 
 import httpStatus from "http-status";
 import prisma from "../../db";
@@ -7,9 +6,10 @@ import { IUser } from "./User.interface";
 import { passwordHelpers } from "../../helpers/passwordHelper";
 import configs from "../../configs";
 
+//  Create User ***
 const createUser = async (payload: IUser) => {
   const { password, data } = payload;
-
+  
   // Check Is User Already Exists ***??
 
   const isExists = await prisma.user.findUnique({
@@ -31,7 +31,7 @@ const createUser = async (payload: IUser) => {
   );
   console.log(hashedPassword);
   // Seperate User Data **
-
+  
   const userData = {
     name: data?.name,
     email: data.email,
@@ -60,6 +60,22 @@ const createUser = async (payload: IUser) => {
   return result;
 };
 
+//  Get Me ***
+const getMe = async (id: string, email: string) => { 
+
+  const userProfile = await prisma.user.findUniqueOrThrow({ 
+    where: {
+       id
+     }
+  }).profile()
+
+
+  return userProfile
+
+}
+
+
 export const UserServices = {
   createUser,
+  getMe
 };
