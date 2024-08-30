@@ -6,7 +6,7 @@ const handlePrismaClientKnownRequestError = (
   err: Prisma.PrismaClientKnownRequestError
 ): IErrorReturnType => {
 
-  const message = err.message
+  const message = err.message + ` Code : --> ${err.code}`
 
   return {
     statusCode: httpStatus.BAD_REQUEST,
