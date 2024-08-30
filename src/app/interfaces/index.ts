@@ -20,3 +20,15 @@ export interface IPaginationOptions {
   sortOrder: "asc" | "desc"
   skip: number
 }
+
+
+interface IIssues {
+  field: string;
+  message: string;
+}
+
+
+
+export interface IErrorDetails {
+  issues: IIssues[];
+}

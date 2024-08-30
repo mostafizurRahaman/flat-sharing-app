@@ -3,8 +3,6 @@ import validateMessages from "../../configs/constant";
 
 
 
-
-
 const UpdateUserProfileValidationSchema = z.object({
   body: z.object({
     bio: z.string({

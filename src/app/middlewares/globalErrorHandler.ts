@@ -1,5 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import httpStatus from "http-status";
+import { ZodError, ZodIssue } from "zod";
+import handleZodError from "../errors/handleZodError";
+import { IErrorDetails } from "../interfaces";
+import configs from "../configs";
 
 const globalErrorHandler = (
   err: Error,
@@ -7,13 +11,24 @@ const globalErrorHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  const message = err.message || "Somethings Went Wrong!!!";
+  let message: string = "Something Went Wrong";
+  let errDetails: IErrorDetails | Error = err;
+  let statusCode: number = httpStatus.INTERNAL_SERVER_ERROR;
 
-  res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+  if (err instanceof ZodError) {
+    const simplifiedErr = handleZodError(err);
+
+    //  Set Values
+    message = simplifiedErr.message;
+    errDetails = simplifiedErr.errDetails;
+    statusCode = simplifiedErr.statusCode;
+  }
+
+  res.status(statusCode).json({
     message,
     success: false,
-    err,
-    stack: err.stack,
+    errDetails: errDetails || err,
+    stack: configs.node_env === "production" ? null : err.stack,
   });
 };
 
