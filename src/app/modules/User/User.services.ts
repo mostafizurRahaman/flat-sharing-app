@@ -64,9 +64,10 @@ const getMe = async (id: string, email: string) => {
     where: {
       id,
       email
-     }
+     }, 
   }).profile()
 
+  
 
   return userProfile
 }
