@@ -1,5 +1,5 @@
 import express from "express";
-import validateRequest from "../../helpers/validateZodRequest";
+import validateRequest from "../../middlewares/validateZodRequest";
 import { bookingValidations } from "./Booking.Validation";
 import { BookingController } from "./Booking.Controller";
 import auth from "../../middlewares/auth";
@@ -17,7 +17,7 @@ router.get("/booking-requests", auth, BookingController.getBookings);
 router.put(
   "/booking-requests/:bookingId",
   auth,
-  validateRequest(bookingValidations.updateBookingValidationSchema) ,
+  validateRequest(bookingValidations.updateBookingValidationSchema),
   BookingController.updateBookingStatus
 );
 

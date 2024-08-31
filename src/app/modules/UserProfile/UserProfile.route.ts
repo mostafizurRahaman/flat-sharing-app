@@ -1,6 +1,6 @@
 import express from "express";
 
-import validateRequest from "../../helpers/validateZodRequest";
+import validateRequest from "../../middlewares/validateZodRequest";
 
 import auth from "../../middlewares/auth";
 import { UserProfileController } from "./UserProfile.Controller";

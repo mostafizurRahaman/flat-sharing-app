@@ -21,6 +21,7 @@ process.on("unhandledRejection", (reason, promise) => {
     reason,
     promise,
   });
+  
   if (server) {
     server.close((err) => {
       process.exit(1);

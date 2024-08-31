@@ -1,6 +1,6 @@
 import express from "express";
 import { UserController } from "./User.controller";
-import validateRequest from "../../helpers/validateZodRequest";
+import validateRequest from "../../middlewares/validateZodRequest";
 import { userValidations } from "./User.validation";
 import auth from "../../middlewares/auth";
 
@@ -12,10 +12,6 @@ router.post(
   UserController.createUser
 );
 
-router.post(
-  "/profile",
-  auth,
-  UserController.getMe
-);
+router.post("/profile", auth, UserController.getMe);
 
 export const userRoutes = router;

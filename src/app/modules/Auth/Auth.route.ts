@@ -1,5 +1,5 @@
 import express from "express";
-import validateRequest from "../../helpers/validateZodRequest";
+import validateRequest from "../../middlewares/validateZodRequest";
 import { AuthValidations } from "./Auth.validation";
 import { AuthController } from "./Auth.controller";
 

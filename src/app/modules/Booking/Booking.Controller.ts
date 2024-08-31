@@ -4,10 +4,9 @@ import { BookingServices } from "./Booking.Services";
 import sendResponse from "../../helpers/sendResponse";
 import httpStatus from "http-status";
 import pick from "../../helpers/pick";
-import { filterAbleFields } from "../Flat/Flat.constant";
 import { bookingFilterAbleFields } from "./Booking.constant";
 import { paginationOptions } from "../../configs/pagination";
-import { IGetBookingParams } from "./Booking.interface";
+
 
 const createBooking = catchAsync(async (req: Request & { user?: any }, res) => {
   const userId = req?.user?.id;
@@ -25,6 +24,7 @@ const createBooking = catchAsync(async (req: Request & { user?: any }, res) => {
 });
 
 const getBookings = catchAsync(async (req: Request & { user?: any }, res) => {
+  console.log(req.cookies);
   const id = req.user.id;
   const params = pick(req.query, bookingFilterAbleFields);
   const options = pick(req.query, paginationOptions);
@@ -45,6 +45,7 @@ const getBookings = catchAsync(async (req: Request & { user?: any }, res) => {
 });
 
 const updateBookingStatus = catchAsync(async (req: Request & { user?: any }, res) => {
+   
     const id = req?.params.bookingId;
     const { status } = req.body;
 

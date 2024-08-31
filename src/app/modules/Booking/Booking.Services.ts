@@ -105,6 +105,7 @@ const getAllFromBookingRequestFromDB = async (
 
 //  Update Booking Status **
 const updateBookingStatus = async (id: string, status: BookStatus) => {
+   
   //  Check Is Booking Exists **
   await prisma.booking.findUniqueOrThrow({
     where: {
