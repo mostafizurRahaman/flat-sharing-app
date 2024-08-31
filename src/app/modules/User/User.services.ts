@@ -52,10 +52,7 @@ const createUser = async (payload: IUser) => {
       },
     });
 
-    return {
-      user,
-      userProfile,
-    };
+    return userProfile
   });
   return result;
 };
